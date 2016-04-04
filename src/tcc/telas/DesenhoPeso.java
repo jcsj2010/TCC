@@ -22,7 +22,7 @@ import javax.swing.JPanel;
  */
 public class DesenhoPeso extends JPanel implements Runnable{
 
-    private String peso = "4576";
+    private String peso = "4000";
     Thread thread;
     
     public DesenhoPeso() {

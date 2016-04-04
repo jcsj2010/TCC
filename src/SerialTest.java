@@ -1,4 +1,13 @@
-import comunicacaoserial.ControlePortaSerial;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+/**
+ *
+ * @author JoseCarlos
+ */
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
@@ -9,15 +18,14 @@ import gnu.io.SerialPortEventListener;
 import java.util.Enumeration;
 
 
-public class Teste implements SerialPortEventListener {
+public class SerialTest implements SerialPortEventListener {
 	SerialPort serialPort;
-        String inputLine = "nada";
         /** The port we're normally going to use. */
 	private static final String PORT_NAMES[] = { 
 			//"/dev/tty.usbserial-A9007UX1", // Mac OS X
                         //"/dev/ttyACM0", // Raspberry Pi
 			//"/dev/ttyUSB0", // Linux
-			"COM5" // Windows
+			"COM5", // Windows
 	};
 	/**
 	* A BufferedReader which will be fed by a InputStreamReader 
@@ -44,7 +52,6 @@ public class Teste implements SerialPortEventListener {
 		while (portEnum.hasMoreElements()) {
 			CommPortIdentifier currPortId = (CommPortIdentifier) portEnum.nextElement();
 			for (String portName : PORT_NAMES) {
-                            System.out.println(portName);
 				if (currPortId.getName().equals(portName)) {
 					portId = currPortId;
 					break;
@@ -74,7 +81,6 @@ public class Teste implements SerialPortEventListener {
 			// add event listeners
 			serialPort.addEventListener(this);
 			serialPort.notifyOnDataAvailable(true);
-                        
 		} catch (Exception e) {
 			System.err.println(e.toString());
 		}
@@ -93,13 +99,11 @@ public class Teste implements SerialPortEventListener {
 
 	/**
 	 * Handle an event on the serial port. Read the data and print it.
-     * @param oEvent
 	 */
-        @Override
 	public synchronized void serialEvent(SerialPortEvent oEvent) {
 		if (oEvent.getEventType() == SerialPortEvent.DATA_AVAILABLE) {
 			try {
-				inputLine=input.readLine();
+				String inputLine=input.readLine();
 				System.out.println(inputLine);
 			} catch (Exception e) {
 				System.err.println(e.toString());
@@ -109,10 +113,9 @@ public class Teste implements SerialPortEventListener {
 	}
 
 	public static void main(String[] args) throws Exception {
-		//ControlePortaSerial main = new ControlePortaSerial();
-		
+		SerialTest main = new SerialTest();
+		main.initialize();
 		Thread t=new Thread() {
-                        @Override
 			public void run() {
 				//the following line will keep this app alive for 1000 seconds,
 				//waiting for events to occur and responding to them (printing incoming messages to console).

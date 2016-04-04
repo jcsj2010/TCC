@@ -26,7 +26,7 @@ public class ControlePorta implements SerialPortEventListener{
   private OutputStream serialOut;
   private static final int DATA_RATE = 9600;
   private static final int TIME_OUT = 2000;
-  private String portaCOM = new String("COM3");
+  private String portaCOM = new String("COM5");
   private BufferedReader serialInput;
   
 
